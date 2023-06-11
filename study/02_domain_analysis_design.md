@@ -112,5 +112,44 @@
     - service
     - web
     
-  ### 개발 순서: 서비스, 리포지토리 계층을 개발하고, 테스트 케이스를 작성해서 검증, 마지막 웹 계층 적용
+### 개발 순서: 서비스, 리포지토리 계층을 개발하고, 테스트 케이스를 작성해서 검증, 마지막 웹 계층 적용
+
+
+### @RequiredArgsConstructor
+- final 혹은 @NotNull이 붙은 필드의 생성자를 자동으로 만들어준다.
+
+``` java
+@Service
+@RequiredArgsConstructor // final인 애를 생성자로 만들어줌
+public class MemberService {
+
+    private final MemberRepository memberRepository;
+
+
+    /*public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }*/
+    
+    ```
+}
+```
+
+### 테스트 케이스
+
+
+### 메모리 DB
+
+- test > resources > application.yml 테스트 케이스할때 main 꺼보다 우선시 된다.
+
+- 메모리DB 모드 설정 
+``` yml
+  spring:
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+```
+
+- 위에 설정이 없어도 스프링부트는 기본적으로 메모리 모드 해준다.
 
