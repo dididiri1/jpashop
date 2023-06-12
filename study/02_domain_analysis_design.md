@@ -218,3 +218,46 @@ public class MemberService {
 
 ## 상품 리포지토리 개발
 
+- id가 없으면 신규로 보고 persist() 
+- id가 있으면 데이터베이스에 저장된 엔티티라고 보고 merge()
+
+``` java
+
+@Repository
+@RequiredArgsConstructor
+public class ItemRepository {
+
+    private final EntityManager em;
+
+    /**
+     * 상품 저장
+     */
+    public void save(Item item) {
+        if (item.getId() == null) {
+            em.persist(item);
+        } else {
+            em.merge(item);
+        }
+    }
+
+    /**
+     * 상품 단건 조회
+     */
+    public Item findOne(Long id) {
+        return em.find(Item.class, id);
+    }
+
+    /**
+     * 상품 전체 조회
+     */
+    public List<Item> findAll() {
+        return em.createQuery("select i from Item i", Item.class).getResultList();
+    }
+    
+    ```    
+}
+
+``` 
+스
+## 상품 서비스 개발
+
