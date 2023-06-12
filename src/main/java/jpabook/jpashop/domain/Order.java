@@ -28,7 +28,7 @@ public class Order {
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "delivery")
+    @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
     private LocalDateTime orderDate;
@@ -44,6 +44,7 @@ public class Order {
 
     public void addOrderItem(OrderItem orderItem) {
         orderItems.add(orderItem);
+        orderItem.setOrder(this);
     }
 
     public void setDelivery(Delivery delivery) {
