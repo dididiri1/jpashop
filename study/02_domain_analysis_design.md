@@ -153,3 +153,68 @@ public class MemberService {
 
 - 위에 설정이 없어도 스프링부트는 기본적으로 메모리 모드 해준다.
 
+## 상품 엔티티 개발(비즈니스 로직추가)
+
+### 비즈니스 로직
+
+- Service 쪽에서 로직을 처리 했는데 객체지향적으로 보면 데이터를
+  가지고 있는 쪽에 엔티티에서 비즈니스로직을 처리하는것이 가장 좋음 응집력이 있음
+- @Setter 없이 값을 넘을떄에는 비즈니스 매소드로 처리하는 것이 바람직하다.
+
+``` java
+
+  @Entity
+  @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+  @DiscriminatorColumn(name = "dtype")
+  @Getter @Setter
+  public abstract class Item {
+  
+      @Id @GeneratedValue
+      @Column(name = "item_id")
+      private Long id;
+
+      ``` 
+    
+      // == 비즈니스 로직 == //
+
+      /**
+       * stock 증가
+       */
+      public void addStock(int quantity) {
+          this.stockQuantity += quantity;
+      }
+
+      /**
+       * stock 감소
+       */
+      public void removeStock(int quantity) {
+          int restStock = this.stockQuantity - quantity;
+          if (restStock < 0) {
+              throw new NotEnoughStockException("need more stock");
+          }
+          this.stockQuantity = restStock;
+      }
+      
+      ``` 
+  }  
+
+``` 
+- 예외를 처리하기 위해 NotEnoughStockException 클래스를 만들고 RuntimeException을 상속받아 Override 함. 
+
+``` java
+  public class NotEnoughStockException extends  RuntimeException {
+
+      public NotEnoughStockException() {
+          super();
+      }
+  
+      public NotEnoughStockException(String message) {
+          super(message);
+      }
+  
+      ``` 
+  }
+``` 
+
+## 상품 리포지토리 개발
+
