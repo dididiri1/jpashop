@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
-@Getter
+@Getter @Setter
 public abstract class Item {
 
     @Id @GeneratedValue
@@ -22,7 +22,7 @@ public abstract class Item {
     private int price;
     private int stockQuantity;
 
-    @ManyToMany(mappedBy = "item")
+    @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 
     // == 비즈니스 로직 == //
