@@ -326,3 +326,65 @@ public class ItemRepository {
 > 반대로 엔티티에는 비즈니스 로직이 거의 없고 서비스 계층에서 대부분의 로직을 처리하는 것을 트랙잭션 스크립트 패턴
 > (http://martinfowler.com/eaaCatalog/transactionScript.html)이라 한다.
 > 
+
+>
+> 참고: 뷰 템플릿 변경사항을 서버 재시작 없이 즉시반영하기
+> 
+
+- 1. spring-boot-devtools 추가
+- 2. html 파일 build > Recomplie
+
+``` yml
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-devtools'
+}
+``` 
+
+### 타임리프 ? 기능
+
+- member.address?.city 해주면 null이면 값이 안나오게 됨. If문 안써도 되는 장점이 있음.
+
+``` html
+  <tr th:each="member : ${members}">
+      <td th:text="${member.id}"></td>
+      <td th:text="${member.name}"></td>
+      <td th:text="${member.address?.city}"></td>
+      <td th:text="${member.address?.street}"></td>
+      <td th:text="${member.address?.zipcode}"></td>
+  </tr>
+
+``` 
+
+### Member 엔티티와 MemberForm의 분리
+
+- 엔티티는 핵심 비즈니스 로직만 가지고 있고 화면에 대한 로직은 없어야됨.
+- 화면에 맞는 로직은 dto나 form 객체로 데이터로 전달하는 것으로 사용하는것이 좋음.
+
+``` java
+  @Getter @Setter
+  public class MemberForm {
+  
+      @NotEmpty(message = "회원 이름은 필수입니다.")
+      private String name;
+  
+      private String city;
+      private String street;
+      private String zipcode;
+      
+      ```
+  }
+```
+
+- 실무에서는 엔티티를 직접 뿌리기 보다는 dto로 처리
+- 
+
+``` java
+  @GetMapping("/members")
+  public String list(Model model) {
+      List<Member> members = memberService.findMembers();
+      model.addAttribute("members", members);
+
+      return "members/memberList";
+        
+  }
+``` 

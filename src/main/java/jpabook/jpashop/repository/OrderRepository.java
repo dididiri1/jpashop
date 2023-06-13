@@ -21,6 +21,9 @@ public class OrderRepository {
         return em.find(Order.class, id);
     }
 
+    /**
+     * JPQL 검색 기능
+     */
     public List<Order> findAll(OrderSearch orderSearch) {
         return em.createQuery("select o from Order o join o.member m " +
                              " where o.status = :status " +
