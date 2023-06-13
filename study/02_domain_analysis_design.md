@@ -327,6 +327,8 @@ public class ItemRepository {
 > (http://martinfowler.com/eaaCatalog/transactionScript.html)이라 한다.
 > 
 
+
+
 >
 > 참고: 뷰 템플릿 변경사항을 서버 재시작 없이 즉시반영하기
 > 
@@ -376,7 +378,6 @@ dependencies {
 ```
 
 - 실무에서는 엔티티를 직접 뿌리기 보다는 dto로 처리
-- 
 
 ``` java
   @GetMapping("/members")
