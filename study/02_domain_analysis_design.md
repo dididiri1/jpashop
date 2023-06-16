@@ -512,3 +512,19 @@ public class ItemService {
     ``` 
 }  
 ``` 
+
+### @ModalAttribute 
+
+- @ModalAttribute 지정되면 modal.addAttribute 자동으로 담겨있어서 사용할 수 있음
+
+``` java
+  @GetMapping("/orders")
+  public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model) {
+      List<Order> orders = orderService.findOrders(orderSearch);
+      model.addAttribute("orders", orders);
+        
+      //model.addAttribute("orderSearch", orderSearch);
+
+      return "/order/orderList";
+  }
+``` 
