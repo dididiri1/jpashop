@@ -13,6 +13,7 @@ spring:
 #        show_sql: true
         format_sql: true
         default_batch_fetch_size: 100 # in 쿼리에 갯수!!!
+    open-in-view: false
 
 
 logging:
