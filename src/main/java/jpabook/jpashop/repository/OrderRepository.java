@@ -100,4 +100,10 @@ public class OrderRepository {
                 .setMaxResults(limit)
                 .getResultList();
     }
+
+    //QueryDSL
+//    public List<Order> findAll(OrderSearch orderSearch) {
+//
+//    }
+
 }
