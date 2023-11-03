@@ -1,4 +1,4 @@
-
+# 실전! 스프링 부트와 JPA 활용2 - API 개발과 성능 최적화
 
 ### V1 엔티티를 Request Body에 직접 매핑
 - 문제점
@@ -598,3 +598,9 @@ Querydsl은 SQL(JPQL)과 모양이 유사하면서 자바 코드로 동적 쿼�
 
 Querydsl은 JPQL을 코드로 만드는 빌더 역할을 할 뿐이다. 따라서 JPQL을 잘 이해하면 금방 배울 수 있 다.
 **Querydsl은 JPA로 애플리케이션을 개발 할 때 선택이 아닌 필수라 생각한다.**
+
+
+
+### Reference
+
+- [실전! 스프링 부트와 JPA 활용2 - API 개발과 성능 최적화](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-JPA-API%EA%B0%9C%EB%B0%9C-%EC%84%B1%EB%8A%A5%EC%B5%9C%EC%A0%81%ED%99%94/dashboard)
